@@ -21,33 +21,39 @@ class App extends React.Component {
 
     setData(letter, letters = []) {
         this.setState({ letter });
-        letters.push(letter);
-
-        window.sessionStorage.setItem('letters', letters.join());
+        window.sessionStorage.setItem('letters', [...letters, letter].join());
     }
 
     isLetterExists(letter, letters) {
-        letters.includes(letter);
+        return letters.includes(letter);
     }
 
     isRunAllLetters(letters, alphabet) {
-        return letters.length === alphabet.length
+        return letters.length >= alphabet.length
     }
 
     isStorageClear(strings) {
-        return !strings || !strings.letter;
+        return !strings || !strings.length;
+    }
+
+    getStorageData(key) {
+        return window.sessionStorage.getItem(key);
+    }
+
+    clearStorageData() {
+        window.sessionStorage.clear();
     }
 
     getRandomLetter() {
         const alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
         const letter = this.getLetter(alphabet, 1);
 
-        const strings = window.sessionStorage.getItem('letters');
+        const strings = this.getStorageData('letters');
         if (this.isStorageClear(strings)) return this.setData(letter);
 
         const letters = strings.split(',');
 
-        if (this.isRunAllLetters(letters, alphabet)) window.sessionStorage.clear();
+        if (this.isRunAllLetters(letters, alphabet)) this.clearStorageData();
         if (this.isLetterExists(letter, letters)) return this.getRandomLetter();
 
         this.setData(letter, letters);
