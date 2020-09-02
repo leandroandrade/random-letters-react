@@ -70,7 +70,7 @@ class App extends React.Component {
                     </section>
 
                     <section className="center word-box">
-                        <h2>{ letter ? letter : <Emoji symbol="😃" label="smile"/> }</h2>
+                        <span>{ letter ? letter : <Emoji symbol="😃" label="smile"/> }</span>
                     </section>
                     <section className="center">
                         <button className="button-options button-primary"

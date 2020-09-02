@@ -64,7 +64,14 @@ body {
 
 .word-box {
     font-size: 40px;
+    font-weight: bold;
     height: 200px;
+}
+
+.button-primary:active {
+    background-color: #007bff;
+    box-shadow: 0 5px #666;
+    transform: translateY(20px);
 }
 
 
